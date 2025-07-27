@@ -1,0 +1,35 @@
+import React from 'react'
+import SideBar from '../../components/Sidebar/SideBar'
+import Nav from '../../components/Nav/Nav'
+import bgSearch from '../../assets/images/Small.png'
+import Search from '../../components/Search/Search'
+import BookingForm from '../../components/bookingform/BookingForm'
+
+function HotelBookingPage() {
+    return (
+        <>
+            <div className=' bg-[#e5e5e5b7] '>
+                <figure className='absolute '><img src={bgSearch} alt="background" /></figure>
+                <div className='z-10 absolute'>
+                    <SideBar />
+                </div>
+                <div className='flex'>
+                    <div className='!mt-5 !ml-38 z-0 w-full'>
+                        <div className='!ml-40'>
+                            <Nav />
+                        </div>
+                        <div className='!mt-2 w-[85%]'>
+                            <Search />
+                        </div>
+                        <div className='!mt-10'>
+                            <BookingForm/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default HotelBookingPage
