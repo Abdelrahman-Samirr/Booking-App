@@ -20,7 +20,7 @@ function HomePage() {
           </div>
 
           <div className="absolute flex gap-4 w-full !ml-[88%] !mt-6">
-            <Link>
+            <Link to={`/login`}>
               <p className="cursor-pointer text-white">Login</p>
             </Link>
             <Link to={`/register`}>
