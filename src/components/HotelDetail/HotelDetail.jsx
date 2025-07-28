@@ -5,9 +5,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaWifi } from "react-icons/fa";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { TbBathFilled } from "react-icons/tb";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { axiosInterceptor } from "../../interceptor";
+import { Link } from "react-router-dom";
 
 function HotelDetail() {
   const [hotel, setHotel] = useState({});
@@ -91,7 +91,9 @@ function HotelDetail() {
                 </div>
               </div>
             </div>
-            <button className="bg-[#0A6ADA] text-xs font-bold cursor-pointer w-full !py-3 rounded-md hover:bg-[rgb(10,95,218)] transition-all ">PAY NOW </button>
+            <Link to={`/booking/${hotel.id}`}>
+              <button className="bg-[#0A6ADA] text-xs text-white font-bold cursor-pointer w-full !py-3 rounded-md hover:bg-[rgb(10,95,218)] transition-all ">PAY NOW </button>
+            </Link>
           </div>
         </div>
       </div>

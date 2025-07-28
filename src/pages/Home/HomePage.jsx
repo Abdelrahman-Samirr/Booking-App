@@ -19,6 +19,7 @@ function HomePage() {
             <SideBar />
           </div>
 
+          {/* login&register  */}
           <div className="absolute flex gap-4 w-full !ml-[88%] !mt-6">
             <Link to={`/login`}>
               <p className="cursor-pointer text-white">Login</p>
@@ -40,7 +41,7 @@ function HomePage() {
             </div>
 
             {/* recommended */}
-            <div className="!mt-8 ">
+            <div className="!mt-8 w-[95.5%]">
               <Recommended />
             </div>
 

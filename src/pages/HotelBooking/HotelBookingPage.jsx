@@ -4,11 +4,12 @@ import Nav from '../../components/Nav/Nav'
 import bgSearch from '../../assets/images/Small.png'
 import Search from '../../components/Search/Search'
 import BookingForm from '../../components/bookingform/BookingForm'
+import HotelSummaryCard from '../../components/HotelSummary/HotelSummaryCard'
 
 function HotelBookingPage() {
     return (
         <>
-            <div className=' bg-[#e5e5e5b7] '>
+            <div className=''>
                 <figure className='absolute '><img src={bgSearch} alt="background" /></figure>
                 <div className='z-10 absolute'>
                     <SideBar />
@@ -21,10 +22,10 @@ function HotelBookingPage() {
                         <div className='!mt-2 w-[85%]'>
                             <Search />
                         </div>
-                        <div className='!mt-10'>
-                            <BookingForm/>
+                        <div className='flex justify-between w-[90%] !mt-10'>
+                            <BookingForm />
+                            <HotelSummaryCard />
                         </div>
-
                     </div>
                 </div>
             </div>

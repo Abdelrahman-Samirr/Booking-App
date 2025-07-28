@@ -13,10 +13,10 @@ function Nav() {
     return (
         <>
             <div className={`flex  gap-[30px] !mt-[8px]`}>
-                <NavLink to='/booking'>
+                <NavLink to='/hotels'>
                     <div className='w-16 !py-0.25 text-center rounded-xl hover:bg-[#0076FF] cursor-pointer'>
                         <FaBed className='text-white text-3xl !ml-4 !pt-2 ' />
-                        <p className='!mt-2 !mb-2 text-white'>Hotel</p>
+                        <p className='!mt-2 !mb-2 text-white'>Hotels</p>
                     </div>
                 </NavLink>
                 <div className='w-16 text-center rounded-xl hover:bg-[#0076FF] cursor-pointer'>

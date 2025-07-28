@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Bg from '../../assets/images/BG.png'
 import logo from '../../assets/images/Vector.png'
+import google from '../../assets/images/google_.png'
+import facebook from '../../assets/images/facebook_.png'
 import { Link } from "react-router-dom";
 
 function RegisterPage() {
@@ -107,9 +109,17 @@ function RegisterPage() {
             Register
           </button>
           <Link to={`/login`}>
-          <p className="text-black text-base !my-6  text-center cursor-pointer underline">Already have an account? <span className="text-[#0A6ADA]">Login</span></p>
+            <p className="text-black text-base !my-6  text-center cursor-pointer underline">Already have an account? <span className="text-[#0A6ADA]">Login</span></p>
           </Link>
-        {/* <p className="text-[#525252] text-center "><span className="text-[#1C1C1C] font-bold">Signup</span> with Others</p> */}
+          <p className="text-[#525252] text-center "><span className="text-[#1C1C1C] font-bold">Signup</span> with Others</p>
+          <div className="flex justify-center items-center gap-2 bg-transparent border-1 border-black !py-2.5 !mt-6 !mb-2 rounded-2xl cursor-pointer">
+            <img src={google} alt="google logo" />
+            <p className="text-[#1C1C1C]">Login with <span className="font-bold">google</span></p>
+          </div>
+          <div className="flex justify-center items-center gap-2 bg-transparent border-1 border-black !py-2.5 !mt-6 rounded-2xl cursor-pointer">
+            <img src={facebook} alt="google logo" />
+            <p className="text-[#1C1C1C]">Login with <span className="font-bold">Facebook</span></p>
+          </div>
         </form>
       </div>
 
