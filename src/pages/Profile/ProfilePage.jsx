@@ -3,12 +3,13 @@ import Nav from "../../components/Nav/Nav"
 import Search from "../../components/Search/Search"
 import BookedHotels from "../../components/BookedHotels/BookedHotels"
 import bgSearch from '../../assets/images/Small.png'
+import ProfileCard from "../../components/ProfileCard/ProfileCard"
 
 
 function ProfilePage() {
   return (
     <>
-    <div className='h-[100vh] bg-[#e5e5e5b7] '>
+      <div className=' '>
         <figure className='absolute '><img src={bgSearch} alt="" /></figure>
         <div className='z-10 absolute'>
           <SideBar />
@@ -19,7 +20,7 @@ function ProfilePage() {
             <div className='!ml-40'>
               <Nav />
             </div>
-            
+
             <div className='!mt-3 w-[85%]'>
 
               <Search />
@@ -30,8 +31,13 @@ function ProfilePage() {
               </div>
 
             </div>
+            <div className="flex">
 
-              <BookedHotels />
+              <div className="!mt-10 flex flex-col gap-y-4 !mb-10">
+                <BookedHotels />
+              </div>
+              <ProfileCard/>
+            </div>
 
           </div>
         </div>

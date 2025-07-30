@@ -22,6 +22,13 @@ function Search() {
     navigate("/search");
   }
 
+  const handleClearFilters = () => {
+  setInput("");
+  setCountry("");
+  setCheckIn("");
+  setCheckOut("");
+};
+
   return (
     <>
       <div className=" ">
@@ -48,7 +55,7 @@ function Search() {
             <label className="text-[#B8C1DE] text-sm !pl-4 !mb-1">CHECK OUT</label>
             <input type="date" className="bg-[#e9e9e9] text-black  w-44  !py-1.5 !px-4 rounded-[25px]" min={new Date().toISOString().split("T")[0]} />
           </div>
-          <h4 className="underline decoration-1 cursor-pointer !mt-7 !mr-2">Clear Filters</h4>
+          <h4 onClick={handleClearFilters} className="underline decoration-1 cursor-pointer !mt-7 !mr-2">Clear Filters</h4>
             <Button type="submit" color="red" className="!px-7 rounded-3xl cursor-pointer !mt-5">
               Search
             </Button>

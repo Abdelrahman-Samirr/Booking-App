@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosInterceptor } from "../../interceptor";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setOffersLoading } from "../../store/slice";
+// import { setOffersLoading } from "../../store/slice";
 
 function Offers() {
   const [offer, setOffer] = useState(null);
@@ -10,17 +10,17 @@ function Offers() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setOffersLoading(true));
+    // dispatch(setOffersLoading(true));
     axiosInterceptor
       .get("best_offer")
       .then((res) => {
         setOffer(res.data);
         console.log(res.data);
-        dispatch(setOffersLoading(false));
+        // dispatch(setOffersLoading(false));
       })
       .catch((err) => {
         console.log(err);
-        dispatch(setOffersLoading(false));
+        // dispatch(setOffersLoading(false));
       });
   }, []);
 

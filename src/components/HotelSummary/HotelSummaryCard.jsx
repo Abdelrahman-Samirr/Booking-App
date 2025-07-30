@@ -7,6 +7,9 @@ import { axiosInterceptor } from '../../interceptor';
 function HotelSummaryCard() {
 
     const [hotel, setHotel] = useState({});
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
+    const [nights, setNights] = useState(0);
 
     const { id } = useParams();
 
@@ -15,6 +18,31 @@ function HotelSummaryCard() {
             setHotel(res.data);
         });
     }, [id]);
+
+    useEffect(() => {
+        if (checkIn && checkOut) {
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+
+            if (checkOutDate > checkInDate) {
+                const timeDiff = checkOutDate - checkInDate;
+                const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                setNights(days);
+            } else {
+                setNights(0);
+            }
+        }
+    }, [checkIn, checkOut]);
+
+    const today = new Date().toISOString().split("T")[0];
+    const pricePerNight = hotel?.pricing?.[0]?.discountedPrice || 0;
+    const totalPrice = pricePerNight * nights;
+
+    const minCheckOut = checkIn
+  ? new Date(new Date(checkIn).getTime() + 24 * 60 * 60 * 1000) // add 1 day
+  : new Date();
+  const minCheckOutStr = minCheckOut.toISOString().split("T")[0];
+
 
     return (
         <>
@@ -35,15 +63,19 @@ function HotelSummaryCard() {
                             {hotel?.pricing?.[0]?.discountedPrice} <span className="text-[#191d2357] text-xs">{hotel?.pricing?.[0]?.currency}</span>
                         </p>
                         <p className="text-[#33344F] text-xs ">{hotel?.pricing?.[0]?.priceUnit}</p>
-                    </div> 
+                    </div>
                 </div>
                 <div className=" flex flex-col !mb-4 !mt-2">
                     <label className="text-[#B8C1DE] text-sm !pl-4 !mb-1">CHECK IN</label>
-                    <input type="date" className="bg-[#e9e9e9] text-black  w-72  !py-2 !px-4 rounded-[25px]" min={new Date().toISOString().split("T")[0]} />
+                    <input type="date" className="bg-[#e9e9e9] text-black  w-72  !py-2 !px-4 rounded-[25px]" min={today}
+                        value={checkIn}
+                        onChange={(e) => setCheckIn(e.target.value)} />
                 </div>
                 <div className="!mr-2 flex flex-col !mb-8">
                     <label className="text-[#B8C1DE] text-sm !pl-4 !mb-1">CHECK OUT</label>
-                    <input type="date" className="bg-[#e9e9e9] text-black  w-72  !py-1.5 !px-4 rounded-[25px]" min={new Date().toISOString().split("T")[0]} />
+                    <input type="date" className="bg-[#e9e9e9] text-black  w-72  !py-1.5 !px-4 rounded-[25px]" min={minCheckOutStr}
+                        value={checkOut}
+                        onChange={(e) => setCheckOut(e.target.value)} />
                 </div>
 
                 <div className='flex items-center justify-between !px-1'>
@@ -52,11 +84,11 @@ function HotelSummaryCard() {
                 </div>
                 <div className='flex items-center justify-between border-b-2 border-black !pb-2 !px-1'>
                     <p className='text-[#191D23] text-[13px]'>Nights</p>
-                    <p className='text-black'>2</p>
+                    <p className='text-black'>{nights}</p>
                 </div>
                 <div className='flex items-center justify-between !pt-2 !px-1'>
                     <p className='text-[#191D23] text-[13px]'>Total Price</p>
-                    <p className='text-black'>$10</p>
+                    <p className='text-black'>${totalPrice}</p>
                 </div>
             </div>
         </>

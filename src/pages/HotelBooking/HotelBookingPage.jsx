@@ -5,8 +5,23 @@ import bgSearch from '../../assets/images/Small.png'
 import Search from '../../components/Search/Search'
 import BookingForm from '../../components/bookingform/BookingForm'
 import HotelSummaryCard from '../../components/HotelSummary/HotelSummaryCard'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { axiosInterceptor } from '../../interceptor';
 
 function HotelBookingPage() {
+
+    const [hotel, setHotel] = useState({});
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        axiosInterceptor.get(`hotels/${id}`).then((res) => {
+            setHotel(res.data);
+        });
+    }, [id]);
+
+
     return (
         <>
             <div className=''>
@@ -23,7 +38,7 @@ function HotelBookingPage() {
                             <Search />
                         </div>
                         <div className='flex justify-between w-[90%] !mt-10'>
-                            <BookingForm />
+                            <BookingForm selectedHotel={hotel} />
                             <HotelSummaryCard />
                         </div>
                     </div>

@@ -5,20 +5,20 @@ import SideBar from "../../components/Sidebar/SideBar";
 import Nav from "../../components/Nav/Nav";
 import Offers from "../../components/offer/Offers";
 import { Link } from "react-router-dom";
+import { Dropdown, DropdownItem } from "flowbite-react";
 import { useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
 
 function HomePage() {
 
-  const { recommended = false, offers = false } = useSelector((state) => state.loading || {});
+  const user = JSON.parse(localStorage.getItem("userData"))
 
-  const isLoading = recommended || offers;
+  const handleLogout = () => {
+        localStorage.removeItem("userData");
+    };
 
   return (
     <>
-    {isLoading && (
-      <Loader/>
-    )}
       {<div className={``}>
         <figure className="absolute ">
           <img src={background} alt="" />
@@ -30,14 +30,24 @@ function HomePage() {
           </div>
 
           {/* login&register  */}
-          <div className="absolute flex gap-4 w-full !ml-[88%] !mt-6">
-            <Link to={`/login`}>
-              <p className="cursor-pointer text-white">Login</p>
-            </Link>
-            <Link to={`/register`}>
-              <p className="cursor-pointer text-white">Sign Up</p>
-            </Link>
-          </div>
+          {user ?
+            <div className="absolute flex gap-4 w-full !ml-[88%] !mt-6">
+              <Dropdown label={user.name} dismissOnClick={false} className="!px-2.5 cursor-pointer">
+                <Link to={"/login"}>
+                  <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
+                </Link>
+              </Dropdown>
+
+            </div> :
+            <div className="absolute flex gap-4 w-full !ml-[88%] !mt-6">
+              <Link to={`/login`}>
+                <p className="cursor-pointer text-white">Login</p>
+              </Link>
+              <Link to={`/register`}>
+                <p className="cursor-pointer text-white">Sign Up</p>
+              </Link>
+            </div>
+          }
 
           <div className="!ml-22 !mt-40 z-0 !mb-30 w-[80%]">
             {/* Navbar */}

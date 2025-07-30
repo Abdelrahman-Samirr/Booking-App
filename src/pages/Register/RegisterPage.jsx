@@ -5,7 +5,8 @@ import logo from '../../assets/images/Vector.png'
 import google from '../../assets/images/google_.png'
 import facebook from '../../assets/images/facebook_.png'
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { axiosInterceptor } from "../../interceptor";
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const {
@@ -15,36 +16,26 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    country: "",
-    mobile: "",
-  });
+  const navigate = useNavigate();
 
-  // i use handleChange to update input related to field name
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    
-    fetch(`http://localhost:3001/users?email=${form.email}&password=${form.password}`)
-    .then((res) => res.json())
-      .then((data) => {
-        if (data.length > 0) {
-          alert("Login successful");
+  const onSubmit = (data) => {
+    axiosInterceptor.get(`users?email=${data.email}`)
+      .then((res) => {
+        if (res.data.length > 0) {
+          alert("Email already registered!");
+          navigate("/login")
         } else {
-          alert("Invalid email or password");
+          // create user
+          axiosInterceptor.post("users", data)
+            .then(() => {
+              alert("Registered successfully!");
+              navigate("/login");
+            });
         }
       });
-    
-  };
 
-  const password = watch("password");
+
+  };
 
   return (
 
@@ -83,7 +74,10 @@ function RegisterPage() {
               type="password"
               {...register("password", {
                 required: "Password is required",
-                minLength: { value: 6, message: "Minimum 6 characters" },
+                pattern: {
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]).+$/,
+                  message: "Password must include at least 1 uppercase letter, 1 number, and 1 special character.",
+                },
               })}
               className="border w-full !p-2 bg-[#EAEBEC] rounded-md text-black"
             />
@@ -122,8 +116,8 @@ function RegisterPage() {
               {...register("phone", {
                 required: "Phone is required",
                 pattern: {
-                  value: /^[0-9]{10,15}$/,
-                  message: "Enter a valid phone number",
+                  value: /^\d{11}$/,
+                  message: "Enter a valid 11-digit phone number",
                 },
               })}
               className="border w-full !p-2 bg-[#EAEBEC] rounded-md text-black"

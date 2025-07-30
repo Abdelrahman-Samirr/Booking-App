@@ -7,8 +7,8 @@ import { axiosInterceptor } from '../../interceptor'
 import FilteredHotels from '../../components/FilteredHotels/FilteredHotels'
 import { useSelector } from 'react-redux'
 import { useDispatch } from "react-redux";
-import { setHotelsLoading } from '../../store/slice'
-import Loader from '../../components/loader/Loader'
+// import { setHotelsLoading } from '../../store/slice'
+// import Loader from '../../components/loader/Loader'
 
 
 function SearchPage() {
@@ -19,18 +19,18 @@ function SearchPage() {
 
   const dispatch = useDispatch();
 
-  const { Hotels = false } = useSelector((state) => state.loading || {});
+  // const { Hotels = false } = useSelector((state) => state.loading || {});
 
-  const isLoading = Hotels;
+  // const isLoading = Hotels;
 
   useEffect(() => {
-    dispatch(setHotelsLoading(true));
+    // dispatch(setHotelsLoading(true));
     axiosInterceptor.get("hotels")
       .then(res => setHotels(res.data))
       .catch(err => console.log(err))
-      .finally(() => {
-        dispatch(setHotelsLoading(false));
-      });
+      // .finally(() => {
+      //   dispatch(setHotelsLoading(false));
+      // });
   }, [])
 
 
@@ -60,14 +60,14 @@ function SearchPage() {
                 <p className='text-xs text-[#191D23] font-semibold'>Total <span className='text-[#177CFD]'>{filteredHotels.length} result</span></p>
               </div>
             </div>
-            {isLoading ? (
+            {/* {isLoading ? (
               <Loader />
-              ):
+              ): */}
 
               <div className='!mt-6 flex flex-wrap gap-4 w-[95%] !mb-10'>
                 <FilteredHotels filteredHotels={filteredHotels} />
               </div>
-            }
+            {/* } */}
           </div>
         </div>
       </div>

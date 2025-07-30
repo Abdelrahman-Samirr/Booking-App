@@ -4,21 +4,39 @@ import Bg from '../../assets/images/BG.png'
 import logo from '../../assets/images/Vector.png'
 import google from '../../assets/images/google_.png'
 import facebook from '../../assets/images/facebook_.png'
-
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { axiosInterceptor } from "../../interceptor";
 
 function LoginPage() {
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    // You can send this data to your backend API
+    axiosInterceptor
+      .get(`users?email=${data.email}&password=${data.password}`)
+      .then((res) => {
+        if (res.data.length > 0) {
+          const userData = res.data[0];
+
+          // Save to localStorage for future times don't fetch again
+          localStorage.setItem("userData", JSON.stringify(userData));
+          navigate("/home");
+        } else {
+          alert("Invalid email or password");
+        }
+      })
+      .catch((err) => {
+        console.error("Login error:", err);
+        alert("Something went wrong.");
+      });
+
   };
 
   return (
