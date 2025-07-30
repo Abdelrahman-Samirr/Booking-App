@@ -1,12 +1,11 @@
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
+function BookedHotel({hotel}) {
 
-
-function HotelCard({ hotel }) {
   return (
     <>
-      <div className='flex bg-white rounded-md overflow-hidden w-[48%]'>
+    <div className='flex bg-white rounded-md overflow-hidden w-[48%]'>
         <Link className='w-[45%]' to={`/detail/${hotel?.id}`}>
           <figure className='w-full object-cover h-full'><img className='h-full object-cover' src={hotel?.images?.main} alt="Hotel" /></figure>
         </Link>
@@ -27,13 +26,13 @@ function HotelCard({ hotel }) {
             )) : ""
             }
           </div>
-          <div className='flex justify-between items-center'>
+          <div className='flex justify-between items-center gap-2'>
             <p className='text-[#FFC54D] text-xs font-semibold'>{hotel?.pricing?.[0]?.discount}  <span className='text-[#191D23] text-[20px] font-extrabold'>${hotel?.pricing?.[0]?.discountedPrice}</span></p>
             <div>
-              <Link to={`/detail/${hotel?.id}`}>
+              <Link to={`/detail/${hotel.id}`}>
                 <button className='bg-[#b4b4b45d] hover:bg-[#b4b4b4cb] text-[#33344F] font-bold text-xs !px-1.5 !py-1.5 rounded-md cursor-pointer'>View details</button>
               </Link>
-              <Link to={`/booking/${hotel?.id}`}>
+              <Link to={`/booking/${hotel.id}`}>
                 <button className='bg-[#0A6ADA] hover:bg-[#0a45da] text-[#FFFFFF] font-bold text-xs !px-1.5 !py-1.5 rounded-md cursor-pointer !mx-3'>BOOK NOW</button>
               </Link>
             </div>
@@ -44,4 +43,4 @@ function HotelCard({ hotel }) {
   )
 }
 
-export default HotelCard
+export default BookedHotel

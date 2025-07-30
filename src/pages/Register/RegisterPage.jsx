@@ -5,6 +5,7 @@ import logo from '../../assets/images/Vector.png'
 import google from '../../assets/images/google_.png'
 import facebook from '../../assets/images/facebook_.png'
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function RegisterPage() {
   const {
@@ -14,9 +15,33 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    // You can send this data to your backend API
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    country: "",
+    mobile: "",
+  });
+
+  // i use handleChange to update input related to field name
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    
+    fetch(`http://localhost:3001/users?email=${form.email}&password=${form.password}`)
+    .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          alert("Login successful");
+        } else {
+          alert("Invalid email or password");
+        }
+      });
+    
   };
 
   const password = watch("password");
@@ -82,9 +107,10 @@ function RegisterPage() {
             <label className="block mb-1 text-[#4D556F]">Country</label>
             <select {...register("country", { required: "Country is required" })} className="border w-full !p-2 bg-[#EAEBEC] rounded-md text-black">
               <option value="">Select Country</option>
-              <option value="egypt">Egypt</option>
-              <option value="ksa">KSA</option>
-              <option value="uae">UAE</option>
+              <option value="Egypt">Egypt</option>
+              <option value="United States">United States</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Greece">Greece</option>
             </select>
             {errors.country && <p className="text-red-500 text-sm !mt-1">{errors.country.message}</p>}
           </div>

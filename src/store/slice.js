@@ -1,19 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  hotels:[],
-  selectedHotel: null,
+const hotelsInitialState = {
+  hotelsArr: [],
 };
 
-const hotelSlice = createSlice({
-  name: 'hotel',
-  initialState,
+const bookedHotelsSlice = createSlice({
+  name: 'hotels',
+  initialState : hotelsInitialState,
   reducers: {
-    setHotels: (state, action) => {
-      state.hotels = action.payload;
+    bookedHotel: (state, action) => {
+      state.BookedHotels.push(action.payload)
     },
+    cancelHotel: (state, action) => {
+      state.BookedHotels = state.BookedHotels.filter(hotel => hotel.id !== action.payload)
+    }
+    
   },
 });
 
-export const { setHotels } = hotelSlice.actions;
-export const hotelReducer = hotelSlice.reducer;
+const searchInitialState = {
+  searchTerm: '',
+  selectedCountry:''
+};
+
+const searchSlice = createSlice({
+  name: 'search',
+  initialState: searchInitialState,
+  reducers: {
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
+    setSelectedCountry:(state, action) => {
+      state.selectedCountry = action.payload
+    }
+  },
+});
+
+
+export const { bookedHotel, cancelHotel } = bookedHotelsSlice.actions;
+export const { setSearchTerm, setSelectedCountry } = searchSlice.actions;
+
+export const bookedReducer = bookedHotelsSlice.reducer;
+export const searchReducer = searchSlice.reducer;

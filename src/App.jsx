@@ -7,6 +7,7 @@ import HotelBookingPage from "./pages/HotelBooking/HotelBookingPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import LoginPage from "./pages/Login/LoginPage";
 import HotelsPage from "./pages/Hotels/HotelsPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/hotels" element={<HotelsPage />} />
+          <Route path="/bookedHotels" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </>

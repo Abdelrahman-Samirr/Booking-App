@@ -36,17 +36,19 @@ function SideBar() {
                                 <p className={`${isSliderOpen ? 'block' : 'hidden'} text-white`}>Home</p>
                             </div>
                         </NavLink>
-                        <div className={`flex gap-3 ${isSliderOpen ? 'w-[90%]' : 'w-[100%]'} !px-3 !py-2.5 hover:rounded-[20px] hover:bg-[#0076FF] cursor-pointer !mt-8`}>
-                            <FaAddressBook className='text-white text-2xl' />
-                            <p className={`${isSliderOpen ? 'block' : 'hidden'}`}>Bookings</p>
-                        </div>
+                        <NavLink to={"/bookedHotels"}>
+                            <div className={`flex gap-3 ${isSliderOpen ? 'w-[90%]' : 'w-[100%]'} !px-3 !py-2.5 hover:rounded-[20px] hover:bg-[#0076FF] cursor-pointer !mt-8`}>
+                                <FaAddressBook className='text-white text-2xl' />
+                                <p className={`${isSliderOpen ? 'block' : 'hidden'} text-white`}>Bookings</p>
+                            </div>
+                        </NavLink>
                         <div className={`flex gap-3 ${isSliderOpen ? 'w-[90%]' : 'w-[100%]'} !px-3 !py-2.5 hover:rounded-[20px] hover:bg-[#0076FF] cursor-pointer !mt-5`}>
                             <BiWorld className='text-white text-2xl' />
-                            <p className={`${isSliderOpen ? 'block' : 'hidden'}`}>Explore</p>
+                            <p className={`${isSliderOpen ? 'block' : 'hidden'} text-white`}>Explore</p>
                         </div>
                         <div className={`flex gap-3 ${isSliderOpen ? 'w-[90%]' : 'w-[100%]'} !px-3 !py-2.5 hover:rounded-[20px] hover:bg-[#0076FF] cursor-pointer !mt-5`}>
                             <FaCircleQuestion className='text-white text-2xl' />
-                            <p className={`${isSliderOpen ? 'block' : 'hidden'}`}>Support</p>
+                            <p className={`${isSliderOpen ? 'block' : 'hidden'} text-white`}>Support</p>
                         </div>
                         <button className={`!px-10 !py-3 text-xs !ml-2 ${isSliderOpen ? 'block' : 'hidden'} rounded-[25px] bg-amber-50 text-[red] border-[red] border-2 hover:bg-[red] hover:text-white cursor-pointer transition-all duration-200 !mt-65`}>Sign UP Now</button>
                     </div>

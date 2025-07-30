@@ -1,16 +1,36 @@
-import React from 'react'
-import styles from './SearchPage.module.css'
+import React, { useEffect, useState } from 'react'
 import bgSearch from '../../assets/images/Small.png'
 import SideBar from '../../components/Sidebar/SideBar'
 import Nav from '../../components/Nav/Nav'
 import Search from '../../components/Search/Search'
-import HotelCard from '../../components/Hotel Card/HotelCard'
+import { axiosInterceptor } from '../../interceptor'
+import FilteredHotels from '../../components/FilteredHotels/FilteredHotels'
+import { useSelector } from 'react-redux'
 
 
 function SearchPage() {
+
+  const [hotels, setHotels] = useState([])
+  const searchTerm = useSelector((state) => state.search.searchTerm);
+  const selectedCountry  = useSelector((state) => state.search.selectedCountry);
+
+  useEffect(() => {
+    axiosInterceptor.get("hotels")
+      .then(res => setHotels(res.data))
+      .catch(err => console.log(err))
+  }, [])
+
+
+  const filteredHotels = hotels.filter((hotel) => {
+    const input = hotel.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    const country = selectedCountry ? hotel?.address?.country?.toLowerCase() === selectedCountry.toLowerCase() : true
+
+    return input && country
+  })
+
   return (
     <>
-      <div className='h-[100vh] bg-[#e5e5e5b7] '>
+      <div className='h-[100vh]  '>
         <figure className='absolute '><img src={bgSearch} alt="" /></figure>
         <div className='z-10 absolute'>
           <SideBar />
@@ -24,11 +44,11 @@ function SearchPage() {
               <Search />
               <div className='flex items-center gap-2 bg-white rounded-md !pl-6 !py-3 !mt-4'>
                 <h4 className='text-[20px] text-[#191D23] font-bold border-r-2 border-black !pr-4'>Hotels</h4>
-                <p className='text-xs text-[#191D23] font-semibold'>Total <span className='text-[#177CFD]'>126 result</span></p>
+                <p className='text-xs text-[#191D23] font-semibold'>Total <span className='text-[#177CFD]'>{filteredHotels.length} result</span></p>
               </div>
             </div>
-            <div className='!mt-6 flex flex-wrap gap-4 w-[95%]'>
-              <HotelCard />
+            <div className='!mt-6 flex flex-wrap gap-4 w-[95%] !mb-10'>
+              <FilteredHotels filteredHotels={filteredHotels} />
             </div>
           </div>
         </div>

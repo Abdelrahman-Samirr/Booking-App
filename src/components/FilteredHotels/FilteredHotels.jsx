@@ -1,9 +1,7 @@
 import HotelCard from '../Hotel Card/HotelCard';
 import notFound from '../../assets/images/notFound.png'
 
-
-function Hotels({filteredHotels}) {
-
+function FilteredHotels({filteredHotels}) {
     return (
         <>
             <div className='!mt-6 flex flex-wrap gap-8 w-[95%]'>
@@ -21,4 +19,4 @@ function Hotels({filteredHotels}) {
     )
 }
 
-export default Hotels
+export default FilteredHotels
