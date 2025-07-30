@@ -10,6 +10,7 @@ const RegisterPage = lazy(() => import("./pages/Register/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
 const HotelsPage = lazy(() => import("./pages/Hotels/HotelsPage"));
 const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 
 function App() {
@@ -22,11 +23,11 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/booking/:id" element={<HotelBookingPage />} />
+            <Route path="/booking/:id" element={<PrivateRoute><HotelBookingPage /></PrivateRoute>} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/hotels" element={<HotelsPage />} />
-            <Route path="/bookedHotels" element={<ProfilePage />} />
+            <Route path="/bookedHotels" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           </Routes>
         </Suspense>
 

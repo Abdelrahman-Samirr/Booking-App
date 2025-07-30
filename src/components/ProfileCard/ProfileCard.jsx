@@ -8,7 +8,7 @@ function ProfileCard() {
 
   return (
     <>
-      <div className="w-[50%] h-100 flex justify-center !py-10 !mr-10">
+      <div className="w-[100%] h-100 flex justify-center !py-10 !mr-10">
         <div className="w-full max-w-md bg-white shadow-md rounded-lg !p-6 text-center">
           <h2 className="text-2xl font-bold text-gray-800 !mb-4">Profile</h2>
 

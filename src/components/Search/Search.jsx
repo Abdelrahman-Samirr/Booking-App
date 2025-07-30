@@ -13,6 +13,7 @@ function Search() {
   const [input, setInput] = useState("");
   const [country, setCountry] = useState("");
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -23,11 +24,23 @@ function Search() {
   }
 
   const handleClearFilters = () => {
-  setInput("");
-  setCountry("");
-  setCheckIn("");
-  setCheckOut("");
-};
+    setInput("");
+    setCountry("");
+    setCheckIn("");
+    setCheckOut("");
+  };
+
+
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const minCheckOutDate = checkIn
+    ? new Date(new Date(checkIn).setDate(new Date(checkIn).getDate() + 1))
+      .toISOString()
+      .split("T")[0]
+    : today;
 
   return (
     <>
@@ -49,16 +62,20 @@ function Search() {
           </div>
           <div className=" flex flex-col">
             <label className="text-[#B8C1DE] text-sm !pl-4 !mb-1">CHECK IN</label>
-            <input type="date" className="bg-[#e9e9e9] text-black  w-44  !py-2 !px-4 rounded-[25px]" min={new Date().toISOString().split("T")[0]} />
+            <input type="date" className="bg-[#e9e9e9] text-black  w-44  !py-2 !px-4 rounded-[25px]" min={today}
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)} />
           </div>
           <div className="!mr-2 flex flex-col">
             <label className="text-[#B8C1DE] text-sm !pl-4 !mb-1">CHECK OUT</label>
-            <input type="date" className="bg-[#e9e9e9] text-black  w-44  !py-1.5 !px-4 rounded-[25px]" min={new Date().toISOString().split("T")[0]} />
+            <input type="date" className="bg-[#e9e9e9] text-black  w-44  !py-1.5 !px-4 rounded-[25px]" min={minCheckOutDate}
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)} />
           </div>
           <h4 onClick={handleClearFilters} className="underline decoration-1 cursor-pointer !mt-7 !mr-2">Clear Filters</h4>
-            <Button type="submit" color="red" className="!px-7 rounded-3xl cursor-pointer !mt-5">
-              Search
-            </Button>
+          <Button type="submit" color="red" className="!px-7 rounded-3xl cursor-pointer !mt-5">
+            Search
+          </Button>
         </form>
       </div>
     </>
