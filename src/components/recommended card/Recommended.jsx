@@ -3,9 +3,13 @@ import { axiosInterceptor } from "../../interceptor";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setRecommendedLoading } from "../../store/slice";
 
 function Recommended() {
   const [data, setData] = useState(null);
+
+  const dispatch = useDispatch();
 
   // scrolls up when ID changes (navigating to another hotel)
   const { id } = useParams();
@@ -16,15 +20,19 @@ function Recommended() {
     });
   }, [id]);
 
+
   useEffect(() => {
+    dispatch(setRecommendedLoading(true));
     axiosInterceptor
       .get("recommended_hotels")
       .then((res) => {
         setData(res.data);
         console.log(res.data);
+        dispatch(setRecommendedLoading(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setRecommendedLoading(false));
       });
   }, []);
 

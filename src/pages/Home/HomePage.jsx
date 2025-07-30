@@ -5,11 +5,21 @@ import SideBar from "../../components/Sidebar/SideBar";
 import Nav from "../../components/Nav/Nav";
 import Offers from "../../components/offer/Offers";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Loader from "../../components/loader/Loader";
 
 function HomePage() {
+
+  const { recommended = false, offers = false } = useSelector((state) => state.loading || {});
+
+  const isLoading = recommended || offers;
+
   return (
     <>
-      <div className={``}>
+    {isLoading && (
+      <Loader/>
+    )}
+      {<div className={``}>
         <figure className="absolute ">
           <img src={background} alt="" />
         </figure>
@@ -51,7 +61,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
 }

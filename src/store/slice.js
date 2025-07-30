@@ -9,10 +9,10 @@ const bookedHotelsSlice = createSlice({
   initialState : hotelsInitialState,
   reducers: {
     bookedHotel: (state, action) => {
-      state.BookedHotels.push(action.payload)
+      state.hotelsArr.push(action.payload)
     },
     cancelHotel: (state, action) => {
-      state.BookedHotels = state.BookedHotels.filter(hotel => hotel.id !== action.payload)
+      state.hotelsArr = state.hotelsArr.filter(hotel => hotel.id !== action.payload)
     }
     
   },
@@ -36,9 +36,34 @@ const searchSlice = createSlice({
   },
 });
 
+const loadingInitialState = {
+  recommended: false,
+  offers: false,
+  Hotels: false
+};
+
+const loadingSlice = createSlice({
+  name: 'loading',
+  initialState: loadingInitialState,
+  reducers: {
+    setRecommendedLoading: (state, action) => {
+      state.recommended = action.payload;
+    },
+    setOffersLoading: (state, action) => {
+      state.offers = action.payload;
+    },
+    setHotelsLoading: (state, action) => {
+      state.Hotels = action.payload;
+    },
+  },
+});
+
+
 
 export const { bookedHotel, cancelHotel } = bookedHotelsSlice.actions;
 export const { setSearchTerm, setSelectedCountry } = searchSlice.actions;
+export const { setRecommendedLoading, setOffersLoading, setHotelsLoading } = loadingSlice.actions;
 
 export const bookedReducer = bookedHotelsSlice.reducer;
 export const searchReducer = searchSlice.reducer;
+export const loadingReducer = loadingSlice.reducer;
