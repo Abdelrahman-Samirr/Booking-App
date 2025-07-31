@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const HomePage = lazy(() => import("./pages/Home/HomePage"));
 const SearchPage = lazy(() => import("./pages/SearchPage/SearchPage"));
@@ -10,8 +11,6 @@ const RegisterPage = lazy(() => import("./pages/Register/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
 const HotelsPage = lazy(() => import("./pages/Hotels/HotelsPage"));
 const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-
 
 function App() {
   return (
@@ -23,14 +22,27 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/booking/:id" element={<PrivateRoute><HotelBookingPage /></PrivateRoute>} />
+            <Route
+              path="/booking/:id"
+              element={
+                <PrivateRoute>
+                  <HotelBookingPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/hotels" element={<HotelsPage />} />
-            <Route path="/bookedHotels" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+            <Route
+              path="/bookedHotels"
+              element={
+                <PrivateRoute>
+                  <ProfilePage />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Suspense>
-
       </BrowserRouter>
     </>
   );
