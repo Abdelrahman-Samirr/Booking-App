@@ -1,27 +1,23 @@
-import { bookedHotel } from '../../store/slice'
-import { useDispatch } from 'react-redux'
+import { bookedHotel } from "../../store/slice";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from 'react';
-import SuccessBooking from '../SuccessBooking/SuccessBooking';
+import { useEffect, useState } from "react";
+import SuccessBooking from "../SuccessBooking/SuccessBooking";
 
-
-function BookingForm({selectedHotel }) {
-
+function BookingForm({ selectedHotel }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm();
 
-
-  const [show, setShow] = useState(false)
-
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userData"));
-    const userId = user?.id
-    
+    const userId = user?.id;
+
     // const bookingUser = JSON.parse(localStorage.getItem(`bookings_${userId}`));
     if (user) {
       const nameParts = (user.name || "").trim().split(" ");
@@ -37,29 +33,24 @@ function BookingForm({selectedHotel }) {
       // setValue("CVV", bookingUser.bookingDetails.cvv || "");
       // setValue("expiryDate", bookingUser.bookingDetails.expiryDate || "");
       // setValue("cardHolder", bookingUser.bookingDetails.cardHolder || "");
-
     }
   }, []);
-
-
 
   const dispatch = useDispatch();
 
   const handleBooking = (data) => {
-  const fullBooking = {
-    ...selectedHotel, 
-    bookingDetails: data, 
-  };
+    const fullBooking = {
+      ...selectedHotel,
+      bookingDetails: data,
+    };
 
-  dispatch(bookedHotel(fullBooking));
-   setShow(true)
-};
+    dispatch(bookedHotel(fullBooking));
+    setShow(true);
+  };
 
   return (
     <>
-    
       <form onSubmit={handleSubmit(handleBooking)} className="w-[68%] mx-auto bg-white !p-8 rounded-lg shadow-md ">
-
         <div>
           <h2 className="text-2xl font-bold text-gray-800 !mb-1">Your Details</h2>
           <p className="text-sm text-gray-500 !mb-6">
@@ -80,26 +71,41 @@ function BookingForm({selectedHotel }) {
 
             <div>
               <label className="block text-sm font-medium text-gray-600">First Name</label>
-              <input type="text" {...register("firstName", { required: "First name is required" })} placeholder="Enter your first name" className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2" />
+              <input
+                type="text"
+                {...register("firstName", { required: "First name is required" })}
+                placeholder="Enter your first name"
+                className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2"
+              />
               {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName.message}</p>}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-600">Last Name</label>
-              <input type="text" {...register("lastName", { required: "Last name is required" })} placeholder="Enter your last name" className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2" />
+              <input
+                type="text"
+                {...register("lastName", { required: "Last name is required" })}
+                placeholder="Enter your last name"
+                className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2"
+              />
               {errors.lastName && <p className="text-red-500 text-xs">{errors.lastName.message}</p>}
             </div>
           </div>
 
           <div className="!mb-4">
             <label className="block text-sm font-medium text-gray-600">Email</label>
-            <input type="email" {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/,
-                message: "Invalid email address",
-              },
-            })} placeholder="yourmail@gmail.com" className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2" />
+            <input
+              type="email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email address",
+                },
+              })}
+              placeholder="yourmail@gmail.com"
+              className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2"
+            />
             {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
           </div>
 
@@ -117,13 +123,18 @@ function BookingForm({selectedHotel }) {
 
             <div>
               <label className="block text-sm font-medium text-gray-600">Mobile</label>
-              <input type="tel" {...register("mobile", {
-                required: "Mobile number is required",
-                pattern: {
-                  value: /^\d{11}$/,
-                  message: "Mobile number must be 11 digits"
-                }
-              })} placeholder="Enter your phone number" className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2" />
+              <input
+                type="tel"
+                {...register("mobile", {
+                  required: "Mobile number is required",
+                  pattern: {
+                    value: /^\d{11}$/,
+                    message: "Mobile number must be 11 digits",
+                  },
+                })}
+                placeholder="Enter your phone number"
+                className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2"
+              />
               {errors.mobile && <p className="text-red-500 text-xs">{errors.mobile.message}</p>}
             </div>
           </div>
@@ -131,18 +142,23 @@ function BookingForm({selectedHotel }) {
 
         <hr className="!my-6" />
 
-        <div className='!mt-4'>
+        <div className="!mt-4">
           <h2 className="text-2xl font-bold text-gray-800 !mb-6">Payment Details</h2>
 
           <div className="!mb-4">
             <label className="block text-sm font-medium text-gray-600">Card Number</label>
-            <input type="text" {...register("cardNumber", {
-              required: "Card number is required",
-              pattern: {
-                value: /^\d{14}$/,
-                message: "Card number must be exactly 14 digits",
-              },
-            })} placeholder="Enter your card number" className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2" />
+            <input
+              type="text"
+              {...register("cardNumber", {
+                required: "Card number is required",
+                pattern: {
+                  value: /^\d{14}$/,
+                  message: "Card number must be exactly 14 digits",
+                },
+              })}
+              placeholder="Enter your card number"
+              className="text-black !mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2"
+            />
             {errors.cardNumber && <p className="text-red-500 text-xs">{errors.cardNumber.message}</p>}
           </div>
 
@@ -152,15 +168,16 @@ function BookingForm({selectedHotel }) {
               <input
                 type="text"
                 {...register("CVV", {
-                  required: "Card holder name is required",
+                  required: "CVV is required",
+                  pattern: {
+                    value: /^\d{3}$/,
+                    message: "CVV must be exactly 3 digits",
+                  },
                 })}
                 placeholder="Enter your card holder name"
                 className="!mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2 text-black"
               />
-              {errors.cardHolder && (
-                <p className="text-red-500 text-xs">{errors.cardHolder.message}</p>
-              )}
-
+              {errors.CVV && <p className="text-red-500 text-xs">{errors.CVV.message}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-600">Expiry Date</label>
@@ -171,13 +188,18 @@ function BookingForm({selectedHotel }) {
 
           <div className="!mb-6">
             <label className="block text-sm font-medium text-gray-600">Card Holder</label>
-            <input type="text" {...register("cardHolder", {
-              required: "Card Holder is required",
-              pattern: {
-                value: /^[A-Z][a-zA-Z ]*$/,
-                message: "Only letters allowed, start with capital",
-              },
-            })} placeholder="Enter your card holder name" className="!mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2 text-black" />
+            <input
+              type="text"
+              {...register("cardHolder", {
+                required: "Card Holder is required",
+                pattern: {
+                  value: /^[A-Z][a-zA-Z ]*$/,
+                  message: "Only letters allowed, start with capital",
+                },
+              })}
+              placeholder="Enter your card holder name"
+              className="!mt-1 block w-full border border-gray-300 rounded-md !px-3 !py-2 text-black"
+            />
             {errors.cardHolder && <p className="text-red-500 text-xs">{errors.cardHolder.message}</p>}
           </div>
 
@@ -186,9 +208,9 @@ function BookingForm({selectedHotel }) {
           </button>
         </div>
       </form>
-      {show && <SuccessBooking onClose={() => setShow(false)}/>}
+      {show && <SuccessBooking onClose={() => setShow(false)} />}
     </>
-  )
+  );
 }
 
-export default BookingForm
+export default BookingForm;

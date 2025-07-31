@@ -8,6 +8,7 @@ import { TbBathFilled } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import { axiosInterceptor } from "../../interceptor";
 import { Link } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function HotelDetail() {
   const [hotel, setHotel] = useState({});
@@ -32,11 +33,7 @@ function HotelDetail() {
           <div className="h-56 sm:h-64 xl:h-100 2xl:h-96 overflow-hidden w-[50%] rounded-2xl">
             <Carousel>
               {hotel?.images?.gallery?.map((img) => (
-                <div key={img.id}>
-                  <figure className="h-full">
-                    <img className="h-full" src={img} alt="" />
-                  </figure>
-                </div>
+                <img className="h-full object-cover" src={img} alt="" />
               ))}
             </Carousel>
           </div>

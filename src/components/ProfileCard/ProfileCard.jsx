@@ -1,14 +1,14 @@
-
+import { useSelector } from "react-redux";
 
 function ProfileCard() {
+  const bookedHotels = useSelector((state) => state.BookedHotels.hotelsArr);
 
   const user = JSON.parse(localStorage.getItem("userData"));
   const bookings = JSON.parse(localStorage.getItem(`bookings_${user?.id}`)) || [];
 
-
   return (
     <>
-      <div className="w-[100%] h-100 flex justify-center !py-10 !mr-10">
+      <div className={`${bookedHotels.length > 0 ? "flex" : "hidden"} w-[50%] h-100 justify-center !py-10 !mr-10`}>
         <div className="w-full max-w-md bg-white shadow-md rounded-lg !p-6 text-center">
           <h2 className="text-2xl font-bold text-gray-800 !mb-4">Profile</h2>
 
@@ -25,9 +25,7 @@ function ProfileCard() {
 
           <p className="text-sm text-gray-500 !mt-1">Personal Account</p>
 
-          <div className="!mt-4 inline-block bg-[#e5e5e5b7] text-black !px-4 !py-2 rounded-full cursor-pointer hover:bg-[#e5e5e5] transition">
-            Edit Profile
-          </div>
+          <div className="!mt-4 inline-block bg-[#e5e5e5b7] text-black !px-4 !py-2 rounded-full cursor-pointer hover:bg-[#e5e5e5] transition">Edit Profile</div>
 
           <div className="!mt-6 text-lg font-medium text-gray-700">
             <strong>Total Paid:</strong>{" "}
@@ -41,10 +39,8 @@ function ProfileCard() {
           </div>
         </div>
       </div>
-
-
     </>
-  )
+  );
 }
 
-export default ProfileCard
+export default ProfileCard;

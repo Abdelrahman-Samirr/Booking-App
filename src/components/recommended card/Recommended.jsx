@@ -20,7 +20,6 @@ function Recommended() {
     });
   }, [id]);
 
-
   useEffect(() => {
     // dispatch(setRecommendedLoading(true));
     axiosInterceptor
@@ -51,33 +50,33 @@ function Recommended() {
       <Slider {...settings}>
         {data?.length > 0
           ? data.map((data) => (
-            <div key={data.id}>
-              <div className="shadow-md flex items-center !px-4.5 !py-3.5 !mx-5 rounded-xl bg-white gap-4">
-                <Link className="w-[40%]" to={`/detail/${data.id}`}>
-                  <figure className="w-full rounded-md overflow-hidden cursor-pointer">
-                    <img className="w-full" src={data.images.main} alt="Hotel" />
-                  </figure>
-                </Link>
-                <div className="W-[70%]">
-                  <div className="!mb-4">
-                    <p className="text-[#596181] font-semibold text-xs">Hotel</p>
-                    <h4 className="text-[#475073] font-extrabold text-base !my-2">{data.name}</h4>
-                    <p className="text-[#596181] font-semibold text-xs">
-                      {data.address.street},{data.address.country}
-                    </p>
-                  </div>
-                  <div className="flex">
-                    <p className="text-[#6C738F] !mr-8 text-xs !mt-1.5">
-                      Cupon: <span className="text-[#475073] font-bold">DHSGJAB09D</span>
-                    </p>
-
-                      <button className="!py-1.5 !px-4 text-xs bg-[#ffe0e0b4] text-[#FF0000] rounded-3xl cursor-pointer hover:bg-[#ffd9d9f8]">Book Now</button>
-
+              <div key={data.id}>
+                <div className="shadow-md flex items-center !px-4.5 !py-3.5 !mx-5 rounded-xl bg-white gap-4">
+                  <Link className="w-[40%]" to={`/detail/${data.id}`}>
+                    <figure className="w-full rounded-md overflow-hidden cursor-pointer">
+                      <img className="w-full" src={data.images.main} alt="Hotel" />
+                    </figure>
+                  </Link>
+                  <div className="W-[70%]">
+                    <div className="!mb-4">
+                      <p className="text-[#596181] font-semibold text-xs">Hotel</p>
+                      <h4 className="text-[#475073] font-extrabold text-base !my-2">{data.name}</h4>
+                      <p className="text-[#596181] font-semibold text-xs">
+                        {data.address.street},{data.address.country}
+                      </p>
+                    </div>
+                    <div className="flex">
+                      <p className="text-[#6C738F] !mr-8 text-xs !mt-1.5">
+                        Cupon: <span className="text-[#475073] font-bold">DHSGJAB09D</span>
+                      </p>
+                      <Link to={`/booking/${data.id}`}>
+                        <button className="!py-1.5 !px-4 text-xs bg-[#ffe0e0b4] text-[#FF0000] rounded-3xl cursor-pointer hover:bg-[#ffd9d9f8]">Book Now</button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))
           : ""}
       </Slider>
     </>
