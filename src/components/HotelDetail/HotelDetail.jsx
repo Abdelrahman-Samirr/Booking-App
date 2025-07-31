@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from "flowbite-react";
 import { FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaWifi } from "react-icons/fa";
@@ -8,6 +7,7 @@ import { TbBathFilled } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import { axiosInterceptor } from "../../interceptor";
 import { Link } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function HotelDetail() {
@@ -31,7 +31,7 @@ function HotelDetail() {
         <h2 className="text-[#33344F] text-[32px] font-bold !mb-4">{hotel?.name}</h2>
         <div className="flex ">
           <div className="h-56 sm:h-64 xl:h-100 2xl:h-96 overflow-hidden w-[50%] rounded-2xl">
-            <Carousel>
+            <Carousel >
               {hotel?.images?.gallery?.map((img) => (
                 <img className="h-full object-cover" src={img} alt="" />
               ))}
