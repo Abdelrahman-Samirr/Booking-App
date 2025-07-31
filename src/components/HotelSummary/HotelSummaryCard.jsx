@@ -4,11 +4,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { axiosInterceptor } from '../../interceptor';
 
-function HotelSummaryCard() {
+function HotelSummaryCard({checkOut, setCheckIn, checkIn, setCheckOut}) {
 
     const [hotel, setHotel] = useState({});
-    const [checkIn, setCheckIn] = useState("");
-    const [checkOut, setCheckOut] = useState("");
+    
     const [nights, setNights] = useState(0);
 
     const { id } = useParams();

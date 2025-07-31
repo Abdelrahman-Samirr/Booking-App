@@ -8,12 +8,12 @@ function ProfileCard() {
 
   return (
     <>
-      <div className={`${bookedHotels.length > 0 ? "flex" : "hidden"} w-[50%] h-100 justify-center !py-10 !mr-10`}>
+      <div className={`${bookedHotels.length > 0 ? "flex" : "hidden"} w-[40%] h-107 justify-center !py-10 !mr-10`}>
         <div className="w-full max-w-md bg-white shadow-md rounded-lg !p-6 text-center">
           <h2 className="text-2xl font-bold text-gray-800 !mb-4">Profile</h2>
 
           <div className="w-20 h-20 !mx-auto flex items-center justify-center bg-[#e5e5e5b7] text-white text-3xl font-bold rounded-full">
-            {user?.fullName
+            {user?.name
               ?.split(" ")
               .map((part) => part[0])
               .slice(0, 2)
@@ -21,7 +21,7 @@ function ProfileCard() {
               .toUpperCase()}
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 !mt-3">{user?.fullName}</h3>
+          <h3 className="text-xl font-semibold text-gray-800 !mt-3">{user?.name}</h3>
 
           <p className="text-sm text-gray-500 !mt-1">Personal Account</p>
 

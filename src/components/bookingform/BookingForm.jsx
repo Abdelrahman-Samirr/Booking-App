@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import SuccessBooking from "../SuccessBooking/SuccessBooking";
 
-function BookingForm({ selectedHotel }) {
+function BookingForm({ selectedHotel, checkIn, checkOut }) {
   const {
     register,
     handleSubmit,
@@ -42,9 +42,12 @@ function BookingForm({ selectedHotel }) {
     const fullBooking = {
       ...selectedHotel,
       bookingDetails: data,
+      checkIn,
+      checkOut
     };
-
     dispatch(bookedHotel(fullBooking));
+
+
     setShow(true);
   };
 

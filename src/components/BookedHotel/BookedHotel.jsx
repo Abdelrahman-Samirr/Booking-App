@@ -1,11 +1,16 @@
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { SlCalender } from "react-icons/sl";
 
-function BookedHotel({hotel}) {
+
+function BookedHotel({ hotel }) {
+
+  console.log(hotel)
 
   return (
+
     <>
-    <div className='flex bg-white rounded-md overflow-hidden w-[85%]'>
+      <div className='flex bg-white rounded-lg overflow-hidden w-[85%]'>
         <Link className='w-[45%]' to={`/detail/${hotel?.id}`}>
           <figure className='w-full object-cover h-full'><img className='h-full object-cover' src={hotel?.images?.main} alt="Hotel" /></figure>
         </Link>
@@ -26,8 +31,14 @@ function BookedHotel({hotel}) {
             )) : ""
             }
           </div>
-          <div className='flex justify-between items-center gap-2'>
-            <p className='text-[#FFC54D] text-xs font-semibold'>{hotel?.pricing?.[0]?.discount}  <span className='text-[#191D23] text-[20px] font-extrabold'>${hotel?.pricing?.[0]?.discountedPrice}</span></p>
+          <div className="flex justify-between">
+            <div className='flex justify-between items-center gap-2'>
+              <p className='text-[#FFC54D] text-xs font-semibold'>{hotel?.pricing?.[0]?.discount}  <span className='text-[#191D23] text-[20px] font-extrabold'>${hotel?.pricing?.[0]?.discountedPrice}</span></p>
+            </div>
+            <div className="flex items-center gap-4 !pr-4">
+              <p className="text-[#33344F] font-bold text-[11px] flex items-center gap-1">From: <SlCalender /> <span className="text-[#858595]">{hotel?.checkIn}</span></p>
+              <p className="text-[#33344F] font-bold text-[11px] flex items-center gap-1">To:<SlCalender /> <span className="text-[#858595]">{hotel?.checkOut}</span></p>
+            </div>
           </div>
         </div>
       </div>

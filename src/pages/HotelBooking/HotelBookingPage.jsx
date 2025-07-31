@@ -21,6 +21,8 @@ function HotelBookingPage() {
         });
     }, [id]);
 
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
 
     return (
         <>
@@ -38,8 +40,8 @@ function HotelBookingPage() {
                             <Search />
                         </div>
                         <div className='flex justify-between w-[90%] !mt-10'>
-                            <BookingForm selectedHotel={hotel} />
-                            <HotelSummaryCard />
+                            <BookingForm selectedHotel={hotel} checkIn={checkIn} checkOut={checkOut} />
+                            <HotelSummaryCard checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} />
                         </div>
                     </div>
                 </div>
